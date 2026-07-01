@@ -9,29 +9,33 @@
 class Solution {
 public:
     ListNode* detectCycle(ListNode *head) {
-       ListNode* slow=head; 
-       ListNode* fast=head; 
-       ListNode* temp=head;
-       bool flag=false;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* temp=head;
 
-       while(fast && fast->next){
-        slow=slow->next;
-        fast=fast->next->next;
+        bool flag=false;
+        // here we detect the cycle
+        while(fast && fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
 
-        if(slow==fast){
-            flag=true;
-            break;
+            if(slow==fast){
+                flag=true;
+                break;
+            }
         }
-       }
-       if(flag){
-       while(temp!=slow){
-        temp=temp->next;
-        slow=slow->next;
-       
-       }
-       return slow;
-       }
+        // if cycle found then move both slow and temp until they meet 
+        // there meeting point is starting node of cycle
+        if(flag){
+            while(temp!=slow){
+                slow=slow->next;
+                temp=temp->next;
+            }
 
-       return NULL; 
+            return slow;
+        }
+
+        return NULL;
+
     }
 };
