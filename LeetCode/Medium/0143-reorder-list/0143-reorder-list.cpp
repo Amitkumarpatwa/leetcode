@@ -55,7 +55,7 @@ public:
             tempC=tempB;
             tempB=tempB->next;
         }
-
+        delete(c);
         tempC->next=tempB;
 
         head=c->next;
