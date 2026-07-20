@@ -14,40 +14,35 @@ public:
         ListNode* prev=NULL;
         ListNode* curr=head;
         ListNode* nextt=head;
-
         while(curr){
             nextt=curr->next;
             curr->next=prev;
             prev=curr;
             curr=nextt;
         }
-
         return prev;
     }
     bool isPalindrome(ListNode* head) {
-        ListNode* temp = new ListNode(10);
-        ListNode* tt=temp;
-        ListNode* t=head;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* temp=head;
+        ListNode* temp1=head;
 
-        while(t){
-            ListNode* newnode= new ListNode(t->val);
-            temp->next=newnode;
-            temp=temp->next;
-            t=t->next;
+        while(fast && fast->next){
+            temp1=slow;
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        tt=reverse(tt->next);
+        temp1->next=NULL;
+        slow=reverse(slow);
 
-        ListNode* p1 = head;
-        ListNode* p2 = tt;
+        while(temp){
+            if(temp->val!=slow->val) return false;
+            temp=temp->next;
+            slow=slow->next;
+        }
 
-        while(p1 && p2){
-        if(p1->val != p2->val)
-        return false;
+        return true;
 
-        p1 = p1->next;
-        p2 = p2->next;
-}
-
-return true;
     }
 };
