@@ -1,21 +1,21 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        int n = s.size();
-        int cnt[3] = {0};
-        int left = 0;
-        int ans = 0;
+       int n=s.size();
+       int l=0,r=0,count=0;
+       int hash[3]={0};
 
-        for (int right = 0; right < n; right++) {
-            cnt[s[right] - 'a']++;
+       while(r<n){
+        hash[s[r]-'a']++;
 
-            while (cnt[0] > 0 && cnt[1] > 0 && cnt[2] > 0) {
-                ans += (n - right);
-                cnt[s[left] - 'a']--;
-                left++;
-            }
+        //now check
+        while(hash[0]>0 && hash[1]>0 && hash[2]>0){
+            count+=n-r;
+            hash[s[l]-'a']--;
+            l++;
         }
-
-        return ans;
+        r++;
+       } 
+       return count;
     }
 };
