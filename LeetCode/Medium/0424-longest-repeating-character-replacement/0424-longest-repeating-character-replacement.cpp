@@ -11,7 +11,7 @@ public:
 
             //check if valid or not
 
-            while(((r-l+1)-maxf)>k){
+            if(((r-l+1)-maxf)>k){
                 hash[s[l]-'A']--;
                 maxf=0;
                 for(int i=0;i<26;i++) maxf=max(maxf,hash[i]);
